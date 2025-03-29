@@ -1,7 +1,14 @@
 "use client";
 import React from "react";
-import { Box, Card, CardContent, Container, Typography } from "@mui/material";
-import { BarChart, Payments, LocalAtm } from "@mui/icons-material";
+import {
+  Box,
+  Card,
+  CardContent,
+  Container,
+  Typography,
+  Grid,
+} from "@mui/material";
+import { BarChart, Payments, LocalAtm, Description } from "@mui/icons-material";
 import {
   LineChart,
   Line,
@@ -35,6 +42,71 @@ const monthlyRevenueData = [
   { month: "Oct", revenue: 9000 },
   { month: "Nov", revenue: 8500 },
   { month: "Dec", revenue: 9500 },
+];
+
+const investments = [
+  {
+    name: "Apple Store",
+    category: "E-commerce, Marketplace",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg",
+    investmentValue: "$54,000",
+    returnValue: "+16%",
+    returnColor: "#22c55e",
+  },
+  {
+    name: "Samsung Mobile",
+    category: "E-commerce, Marketplace",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/2/24/Samsung_Logo.svg",
+    investmentValue: "$25,300",
+    returnValue: "-4%",
+    returnColor: "#ef4444",
+  },
+  {
+    name: "Tesla Motors",
+    category: "Electric Vehicles",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/b/bd/Tesla_Motors.svg",
+    investmentValue: "$8,200",
+    returnValue: "+25%",
+    returnColor: "#22c55e",
+  },
+];
+
+const trendingStocks = [
+  {
+    id: "01",
+    name: "Trivago",
+    price: "$520",
+    returnValue: "+5%",
+    returnColor: "#22c55e",
+  },
+  {
+    id: "02",
+    name: "Canon",
+    price: "$480",
+    returnValue: "+10%",
+    returnColor: "#22c55e",
+  },
+  {
+    id: "03",
+    name: "Uber Food",
+    price: "$350",
+    returnValue: "-3%",
+    returnColor: "#ef4444",
+  },
+  {
+    id: "04",
+    name: "Nokia",
+    price: "$940",
+    returnValue: "+2%",
+    returnColor: "#22c55e",
+  },
+  {
+    id: "05",
+    name: "Tiktok",
+    price: "$670",
+    returnValue: "-12%",
+    returnColor: "#ef4444",
+  },
 ];
 
 export default function BankDashboard() {
@@ -173,7 +245,6 @@ export default function BankDashboard() {
               </Box>
             </Box>
           </Box>
-
           {/* Charts Section */}
           <Box sx={{ display: "flex", gap: 4, mb: 4 }}>
             {/* Yearly Total Investment Title */}
@@ -191,28 +262,15 @@ export default function BankDashboard() {
                     <ResponsiveContainer width="100%" height="100%">
                       <LineChart data={yearlyInvestmentData}>
                         <CartesianGrid strokeDasharray="3 3" vertical={false} />
-                        <XAxis
-                          dataKey="year"
-                          type="category"
-                          domain={["2016", "2021"]}
-                          width={100}
-                          tick={{ angle: 0 }}
-                          interval={0}
-                        />
+                        <XAxis dataKey="year" />
                         <YAxis
                           tickFormatter={(value) =>
                             `$${value.toLocaleString()}`
                           }
-                          domain={[0, 40000]}
-                          ticks={[0, 10000, 20000, 30000, 40000]}
-                          tickMargin={35}
-                          width={100}
-                          axisLine={{ stroke: "#ddd", strokeWidth: 1 }}
-                          tickLine={{ stroke: "#ddd", strokeWidth: 1 }}
                         />
                         <Tooltip
                           formatter={(value) => [
-                            `${value.toLocaleString()}`,
+                            `$${value.toLocaleString()}`,
                             "Amount",
                           ]}
                         />
@@ -230,6 +288,7 @@ export default function BankDashboard() {
                 </CardContent>
               </Card>
             </Box>
+
             {/* Monthly Revenue Title */}
             <Box sx={{ width: "52%" }}>
               <Typography
@@ -250,16 +309,10 @@ export default function BankDashboard() {
                           tickFormatter={(value) =>
                             `$${value.toLocaleString()}`
                           }
-                          domain={[0, 10000]}
-                          ticks={[0, 2500, 5000, 7500, 10000]}
-                          tickMargin={35}
-                          width={100}
-                          axisLine={{ stroke: "#ddd", strokeWidth: 1 }}
-                          tickLine={{ stroke: "#ddd", strokeWidth: 1 }}
                         />
                         <Tooltip
                           formatter={(value) => [
-                            `${value.toLocaleString()}`,
+                            `$${value.toLocaleString()}`,
                             "Revenue",
                           ]}
                         />
@@ -278,8 +331,133 @@ export default function BankDashboard() {
               </Card>
             </Box>
           </Box>
+
+          {/* Charles Section */}
+          <Grid container spacing={12}>      {/* space between my investment and trending stocks}
+            {/* My Investment Section */}
+            
+            <Grid
+              item
+              xs={12}
+              md={5}
+              sx={{ display: "flex", flexDirection: "column" }}
+            >
+              <Typography variant="h6" fontWeight={600} mb={2}>
+                My Investment
+              </Typography>
+              <Box display="flex" flexDirection="column" sx={{ flexGrow: 1 }}>
+                {investments.map((investment, index) => (
+                  <Card
+                    key={index}
+                    sx={{
+                      display: "flex",
+                      alignItems: "center",
+                      p: 2,
+                      borderRadius: 3,
+                      boxShadow: 1,
+                      mb: 2,
+                    }}
+                  >
+                    {" "}
+                    {/* Added bottom margin */}
+                    <Box
+                      component="img"
+                      src={investment.logo}
+                      alt={investment.name}
+                      sx={{ width: 40, height: 40, mr: 2 }}
+                    />
+                    <Box flexGrow={1}>
+                      <Typography fontWeight={600}>
+                        {investment.name}
+                      </Typography>
+                      <Typography color="gray" fontSize={14}>
+                        {investment.category}
+                      </Typography>
+                    </Box>
+                    <Box flex={1} textAlign="center">
+                      <Typography fontWeight={600}>
+                        {investment.investmentValue}
+                      </Typography>
+                    </Box>
+                    <Box textAlign="right">
+                      <Typography color={investment.returnColor} fontSize={14}>
+                        {investment.returnValue}
+                      </Typography>
+                    </Box>
+                  </Card>
+                ))}
+              </Box>
+            </Grid>
+
+            {/* Space between  each sections */}
+            <Grid item xs={12} sx={{ mt: 4 }} />
+
+            {/* Trending Stocks Section */}
+            <Grid
+              item
+              xs={12}
+              md={7}
+              sx={{ display: "flex", flexDirection: "column" }}
+            >
+              <Typography variant="h6" fontWeight={600} mb={2}>
+                Trending Stocks
+              </Typography>
+              <Card sx={{ borderRadius: 1, boxShadow: 1, p: 2, flexGrow: 1 }}>
+                <Box component="table" width="100%" borderCollapse="collapse">
+                  <Box component="thead">
+                    <Box component="tr" bgcolor="#f5f7fa">
+                      <Box component="th" textAlign="left" px={2} py={1}>
+                        SL No
+                      </Box>
+                      <Box component="th" textAlign="left" px={2} py={1}>
+                        Name
+                      </Box>
+                      <Box component="th" textAlign="right" px={2} py={1}>
+                        Price
+                      </Box>
+                      <Box component="th" textAlign="right" px={2} py={1}>
+                        Return
+                      </Box>
+                    </Box>
+                  </Box>
+                  <Box component="tbody">
+                    {trendingStocks.map((stock) => (
+                      <Box
+                        component="tr"
+                        key={stock.id}
+                        borderBottom="1px solid #ddd"
+                        sx={{ mb: 2 }}
+                      >
+                        {" "}
+                        {/* Added bottom margin */}
+                        <Box component="td" px={2} py={1}>
+                          {stock.id}
+                        </Box>
+                        <Box component="td" px={2} py={1}>
+                          {stock.name}
+                        </Box>
+                        <Box component="td" px={2} py={1} textAlign="right">
+                          {stock.price}
+                        </Box>
+                        <Box
+                          component="td"
+                          px={2}
+                          py={1}
+                          textAlign="right"
+                          color={stock.returnColor}
+                        >
+                          {stock.returnValue}
+                        </Box>
+                      </Box>
+                    ))}
+                  </Box>
+                </Box>
+              </Card>
+            </Grid>
+          </Grid>
         </Container>
       </Box>
     </Box>
   );
 }
+
