@@ -8,12 +8,13 @@ import SearchResults from './SearchResults';
 import { NavLink } from 'react-router-dom';
 
 function Header({ pageTitle, 
-                  navFunc, 
+                  navFunc,
+                  setShowNav, 
                   searchTerm, 
                   setSearchTerm,  
                   setShowSearchList }) {
 
-  const [showNav, setShowNav ] = useState(false)
+  
 
   const userImageURL = 'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?q=80&w=1064&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
 
@@ -32,7 +33,7 @@ function Header({ pageTitle,
 
   return (
     <>
-      <div className='header-grid w-full h-full sm:px-5 md:px-10'>
+      <div className='header-grid w-full h-full'>
         {/* Hamburger Menu, only visible on mobile screens */}
         <div className="hamburger-menu w-12 h-12 flex items-center justify-center text-2xl sm:flex md:hidden"
           style={pageTitleStyle}
@@ -42,7 +43,7 @@ function Header({ pageTitle,
         </div>
 
         {/* Page Title */}
-        <p className="header-page-title sm:text-2xl md:text-3xl font-semibold h-12 flex items-center" style={pageTitleStyle}>{pageTitle}</p>
+        <p className="header-page-title sm:text-2xl md:text-3xl font-semibold h-12 flex items-center pl-4" style={pageTitleStyle}>{pageTitle}</p>
         
         {/* Search Box */}
 
@@ -87,14 +88,6 @@ function Header({ pageTitle,
           <img src={userImageURL} alt="User's profile image" className='' />
         </div>
       </div>
-
-
-      <MobileNav 
-        showNav={showNav} 
-        setShowNav={setShowNav}
-        viewPage={pageTitle}
-        navFunc={navFunc} 
-      />
     </>
   )
 }
