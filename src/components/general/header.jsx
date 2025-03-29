@@ -7,11 +7,13 @@ import MobileNav from './MobileNav';
 import SearchResults from './SearchResults';
 import { NavLink } from 'react-router-dom';
 
-function Header({ pageTitle, navFunc }) {
+function Header({ pageTitle, 
+                  navFunc, 
+                  searchTerm, 
+                  setSearchTerm,  
+                  setShowSearchList }) {
 
   const [showNav, setShowNav ] = useState(false)
-  const [showSearchList, setShowSearchList] = useState(false)
-  const [searchTerm, setSearchTerm] = useState('')
 
   const userImageURL = 'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?q=80&w=1064&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
 
@@ -52,46 +54,19 @@ function Header({ pageTitle, navFunc }) {
           <input 
             type="text" 
             placeholder='Search for something'
+            className='bg-inherit'
             onFocus={() => setShowSearchList(true)}
             value={searchTerm}
             onChange={() => {setSearchTerm(event.target.value)}}
           />
 
-          <div 
-            className="search-overlay fixed top-0 left-0 w-screen h-screen bg-black opacity-50 flex justify-center items-center"
-            style={{display: `${showSearchList ? 'flex' : 'none'}`}}
-            
-          >
-            <div onClick={() => {setSearchTerm(''); setShowSearchList(false)}} className="fixed top-0 left-0 w-screen h-screen opacity-50 bg-black"></div>
-            <div 
-              className="search-drop-down z-10 rounded-xl flex flex-col gap-10 p-5 w-4/6 h-1/2 bg-white"
-            >
-              <div style={pageTitleStyle} className="px-5 bg-gray-fill rounded-xl">
-                <input 
-                  type="text" 
-                  className='w-full h-15 rounded-lg text-inherit'
-                  placeholder='Search for something'
-                  onChange={() => {setSearchTerm(event.target.value)}}
-                  value={searchTerm}
-                />
-              </div>
-              <div style={headerBlueColorStyle} className='overflow-y-auto'>
-                <SearchResults 
-                  searchTerm={searchTerm} 
-                  navFunc={navFunc} 
-                  searchToggle={setShowSearchList}
-                  setSearchTerm={setSearchTerm} 
-                />
-              </div>
-              
-            </div>
-          </div>
+         
         </div>
 
         {/* Setting Icon */}
 
         <div 
-          className="header-gear-icon cursor-pointer text-2xl bg-gray-fill h-12 w-12 flex justify-center items-center rounded-full sm:hidden md:flex large-screens-only"
+          className="header-gear-icon cursor-pointer text-2xl bg-gray-fill h-12 w-12 flex justify-center items-center rounded-full large-screens-only"
           style={headerBlueColorStyle}
           onClick={() => navFunc('Setting')}
         >
@@ -101,15 +76,15 @@ function Header({ pageTitle, navFunc }) {
         {/* Bell Icon */}
 
         <div 
-          className="header-bell-icon cursor-pointer text-2xl bg-gray-fill h-12 w-12 flex justify-center items-center rounded-full sm:hidden md:flex large-screens-only"
+          className="header-bell-icon cursor-pointer text-2xl bg-gray-fill h-12 w-12 flex justify-center items-center rounded-full large-screens-only"
           style={headerRedColorStyle}
         >
           <LuBellDot />
         </div>
 
         {/*User Image  */}
-        <div className="header-user-image h-15 w-15 rounded-full bg-gray-fill">
-          <img src={userImageURL} alt=""  />
+        <div className="header-user-image h-14 w-14">
+          <img src={userImageURL} alt="User's profile image" className='' />
         </div>
       </div>
 
