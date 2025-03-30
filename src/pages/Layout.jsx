@@ -1,6 +1,6 @@
 import { useState, useContext } from 'react'
 import { Outlet } from 'react-router-dom'
-import Logo from '../components/general/Logo'
+import Logo from '../components/general/logo'
 import Navigation from '../components/general/Navigation'
 import Header from '../components/general/Header'
 import SearchOverlay from '../components/general/SearchOverlay'
