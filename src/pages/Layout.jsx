@@ -1,17 +1,16 @@
-import { useState, useContext } from 'react'
-import { Outlet } from 'react-router-dom'
-import Logo from '../components/general/logo'
-import Navigation from '../components/general/Navigation'
-import Header from '../components/general/Header'
-import SearchOverlay from '../components/general/SearchOverlay'
-import MobileNav from '../components/general/MobileNav'
-
+import { useState, useContext } from "react";
+import { Outlet } from "react-router-dom";
+import Logo from "../components/general/logo";
+import Navigation from "../components/general/navigation";
+import Header from "../components/general/header";
+import SearchOverlay from "../components/general/SearchOverlay";
+import MobileNav from "../components/general/MobileNav";
 
 function Layout() {
-  const [contentPage, setContentPage] = useState('Overview')
-  const [searchTerm, setSearchTerm] = useState('')
-  const [showSearchList, setShowSearchList] = useState(false)
-  const [showNav, setShowNav ] = useState(false)
+  const [contentPage, setContentPage] = useState("Overview");
+  const [searchTerm, setSearchTerm] = useState("");
+  const [showSearchList, setShowSearchList] = useState(false);
+  const [showNav, setShowNav] = useState(false);
 
   return (
     <>
@@ -23,11 +22,11 @@ function Layout() {
           </div>
           <div className="w-full bg-white">
             {/*Header here */}
-            <Header 
-              pageTitle={contentPage} 
+            <Header
+              pageTitle={contentPage}
               navFunc={setContentPage}
               setShowNav={setShowNav}
-              searchTerm={searchTerm} 
+              searchTerm={searchTerm}
               setSearchTerm={setSearchTerm}
               showSearchList={showSearchList}
               setShowSearchList={setShowSearchList}
@@ -43,7 +42,6 @@ function Layout() {
             <Outlet />
           </div>
         </div>
-
       </div>
       <SearchOverlay
         showSearchList={showSearchList}
@@ -57,10 +55,10 @@ function Layout() {
         showNav={showNav}
         setShowNav={setShowNav}
         viewPage={contentPage}
-        navFunc={setContentPage} 
+        navFunc={setContentPage}
       />
     </>
   );
 }
 
-export default Layout
+export default Layout;
