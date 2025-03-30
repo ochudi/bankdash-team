@@ -79,14 +79,14 @@ function Navigation({ viewPage, navFunc }) {
   ]
 
   return (
-    <nav className="w-full flex flex-col mt-4 gap-1">
+    <nav className="w-full flex flex-col mt-4 gap-2">
       {
         menu.map(
           item => {
             return (
               <NavLink to={item.destination}>
                 <div 
-                  className={`flex justify-start items-center gap-3 h-13 px-8 nav-item ${viewPage === item.headerText ? 'active-tab' : 'nav-text-gray'}`}
+                  className={`flex justify-start items-center gap-3 h-12 p-3 nav-item ${viewPage === item.headerText ? 'active-tab' : 'nav-text-gray'}`}
                   onClick={() => {navFunc(item.headerText)}}
                 >
                   <span className="text-2xl">{item.icon}</span>{item.tabTitle}
